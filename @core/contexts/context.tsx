@@ -1,11 +1,6 @@
-import React, {
-   
-    createContext,
-    useContext,
-    useEffect,
-   
-    useState,
-} from 'react';
+import { useRouter } from 'next/router';
+import Cookies from 'js-cookie';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 
 export interface StateContextType {
     name: string;
@@ -15,7 +10,6 @@ export interface StateContextType {
     setTheme: React.Dispatch<React.SetStateAction<string>>;
     locale: string;
     setLocale: React.Dispatch<React.SetStateAction<string>>;
-   
 }
 
 const initialState = {
@@ -25,7 +19,6 @@ const initialState = {
     setName: () => {},
     setTheme: () => {},
     setLocale: () => {},
-    
 };
 
 const StateContext = createContext<StateContextType>(initialState);
@@ -34,28 +27,27 @@ const ContextProvider: React.FC<{ children: React.ReactNode }> = ({
     children,
 }) => {
     const [name, setName] = useState('');
-    const [theme, setTheme] = useState('');
-    const [locale, setLocale] = useState('');
-    
+    const [theme, setTheme] = useState('light');
+    const [locale, setLocale] = useState('en');
+    const router = useRouter();
 
     useEffect(() => {
-        const storedName = localStorage.getItem('name');
-        const storedTheme = localStorage.getItem('theme');
-        const storedLocale = localStorage.getItem('locale');
-      
+        const storedName = Cookies.get('name');
+        const storedTheme = Cookies.get('theme');
+        const storedLocale = Cookies.get('locale');
+        router.push(router.pathname, router.asPath, { locale: storedLocale });
         if (storedName) {
-          setName(storedName);
+            setName(storedName);
         }
-      
-        if (storedTheme) {
-          setTheme(storedTheme);
-        }
-      
-        if (storedLocale) {
-          setLocale(storedLocale);
-        }
-      }, []);
 
+        if (storedTheme) {
+            setTheme(storedTheme);
+        }
+
+        if (storedLocale) {
+            setLocale(storedLocale);
+        }
+    }, []);
 
     return (
         <StateContext.Provider
@@ -66,7 +58,6 @@ const ContextProvider: React.FC<{ children: React.ReactNode }> = ({
                 setTheme,
                 locale,
                 setLocale,
-               
             }}
         >
             {children}

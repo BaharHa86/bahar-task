@@ -1,3 +1,41 @@
 {
-    "Home" : "Home" 
+
+   "Header" :{
+     "AppBar" : "AppBar"
+   },
+
+   "SideBar":{
+     "Dashboard" : "Dashboard",
+     "Home" : "Home",
+     "Todos" : "Todos",
+     "Weather" : "Weather",
+     "Profile" : "Profile"
+   },
+
+    "Home": {
+        "Home": "Home",
+        "Good morning": "Good morning",
+        "Good afternoon": "Good afternoon",
+        "Good night": "Good night",
+        "User": "User",
+        ",":","
+    },
+    "Todos": {
+        "Todos List": "Todos List",
+        "Add a new todo": "Add a new todo",
+        "Add": "Add"
+    },
+    "Weather":{
+        "Enter city" : "Enter city"
+    },
+    "Profile":{
+        "Name" : "Name",
+        "theme" : "theme",
+        "locale" : "locale",
+        "Save" : "Save",
+        "English" :"English" ,
+        "Persian" :"Persian",
+        "Dark" : "Dark" ,
+        "Light" : "Light"
+    }
 }

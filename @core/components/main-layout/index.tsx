@@ -1,80 +1,69 @@
-import React,{ReactNode, useEffect, useState} from 'react'
-import Header from '../header'
+import React, { ReactNode, useEffect, useState } from 'react';
+import Header from '../header';
 import SideBar from '../side-bar';
-import { Box, ThemeProvider, createTheme } from '@mui/material';
-import { TFunction } from 'i18next';
+import {
+    Box,
+    PaletteMode,
+    Theme,
+    ThemeProvider,
+    createTheme,
+    Direction,
+} from '@mui/material';
 import { useStateContext } from '@/@core/contexts/context';
- 
+import { useRouter } from 'next/router';
 
-
-
-interface MainLayoutProps{
-    children:ReactNode;
-   
+interface MainLayoutProps {
+    children: ReactNode;
 }
 
-function MainLayout({children}:MainLayoutProps) {
-  const { theme } =
-  useStateContext();
+function MainLayout({ children }: MainLayoutProps) {
+    const { theme, locale } = useStateContext();
 
-  // const [currentTheme , setCurrentTheme] = useState<theme>(lightTheme);
-  // const lightTheme = createTheme({
-  //   palette: {
-  //   mode: 'light',
-  //   primary: {
-  //   main: '#000',
-  //   },
-  //   background: {
-  //   default: '#F5F5F5',
-  //   paper: '#FFF',
-  //   },
-  //   text: {
-  //   primary: '#000',
-  //   secondary: '#666666',
-  //   },
-  //   },
-  //   });
-    
-  //   const darkTheme = createTheme({
-  //   palette: {
-  //   mode: 'dark',
-  //   primary: {
-  //   main: '#FFF',
-  //   },
-  //   background: {
-  //   default: '#000',
-  //   paper: '#1C1C1C',
-  //   },
-  //   text: {
-  //   primary: '#FFF',
-  //   secondary: '#B3B3B3',
-  //   },
-  //   },
-  //   });
-    // useEffect(() => {
-    //   if(theme === 'dark'){
-    //    setCurrentTheme(darkTheme);
-    //   } else{
-    //     setCurrentTheme(lightTheme);
-    //   }
-    // } , [theme]);
-  return (
-    // <ThemeProvider theme={theme}>
-    <Box>
-        <Header />
-        <Box sx={{
-          display:'flex',
-          flexDirection:'row',
-          justifyContent:'space-between'
-        }}>
-            <SideBar/>
-            <main>
-                 {children}
-            </main>
-        </Box>
-        </Box>
-        // </ThemeProvider>
-  )
+    const router = useRouter();
+
+    const defaultTheme = createTheme();
+    const [currentTheme, setCurrentTheme] = useState<Theme>(defaultTheme);
+    const [currentMode, setCurrentMode] = useState<PaletteMode>('light');
+    const [currentDirection, setCurrentDirection] = useState<Direction>('ltr');
+
+    useEffect(() => {
+        setCurrentMode(theme === 'dark' ? 'dark' : 'light');
+        setCurrentDirection(locale === 'fa' ? 'rtl' : 'ltr');
+        const newTheme = createTheme({
+            direction: currentDirection,
+            palette: {
+                mode: currentMode,
+            },
+        });
+        setCurrentTheme(newTheme);
+    }, [currentDirection, currentMode, locale, router.locale, theme]);
+    return (
+        <ThemeProvider theme={currentTheme}>
+            <Box sx={{ width: '100%' }} dir={currentDirection}>
+                <Header />
+                <Box
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                        width: '100vw',
+                    }}
+                >
+                    <SideBar />
+                    <main
+                        style={{
+                            width: '80vw',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'self-start',
+                        }}
+                    >
+                        {children}
+                    </main>
+                </Box>
+            </Box>
+        </ThemeProvider>
+    );
 }
 
-export default MainLayout
+export default MainLayout;

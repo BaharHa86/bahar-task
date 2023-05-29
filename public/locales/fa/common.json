@@ -1,3 +1,39 @@
 {
-    "Home" : "خانه"
+    "Header" :{
+        "AppBar" : "منوی سایت"
+      },
+      "SideBar":{
+        "Dashboard" : "داشبورد",
+        "Home" : "خانه",
+        "Todos" : "کارها",
+        "Weather" : "آب و هوا",
+        "Profile" : "پروفایل"
+      },
+
+    "Home": {
+        "Home": "خانه",
+        "Good morning": "صبح بخیر",
+        "Good afternoon": "بعد از بخیر",
+        "Good night": "شب بخیر",
+        "User": "کاربر",
+        "," : "،"
+    },
+    "Todos": {
+        "Todos List": "لیست انجام کارها",
+        "Add a new todo": "افزودن کار جدید",
+        "Add": "افزودن"
+    },
+    "Weather":{
+        "Enter city" : "یک شهر انتخاب کنید"
+    },
+    "Profile":{
+        "Name" : "نام",
+        "theme" : "پوسته",
+        "locale" : "زبان",
+        "Save" : "ذخیره",
+        "English" :"انگلیسی" ,
+        "Persian" :"فارسی",
+        "Dark" : "تیره" ,
+        "Light" : "روشن"
+    }
 }
