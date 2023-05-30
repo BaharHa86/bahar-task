@@ -25,10 +25,16 @@ function MainLayout({ children }: MainLayoutProps) {
     const [currentTheme, setCurrentTheme] = useState<Theme>(defaultTheme);
     const [currentMode, setCurrentMode] = useState<PaletteMode>('light');
     const [currentDirection, setCurrentDirection] = useState<Direction>('ltr');
-
     useEffect(() => {
         setCurrentMode(theme === 'dark' ? 'dark' : 'light');
         setCurrentDirection(locale === 'fa' ? 'rtl' : 'ltr');
+    }, [theme,locale]);
+    
+    
+    
+    
+    useEffect(() => {
+      
         const newTheme = createTheme({
             direction: currentDirection,
             palette: {
@@ -36,10 +42,18 @@ function MainLayout({ children }: MainLayoutProps) {
             },
         });
         setCurrentTheme(newTheme);
-    }, [currentDirection, currentMode, locale, router.locale, theme]);
+    }, [ currentDirection, currentMode]);
+
+
+
+    
+ 
+   
     return (
         <ThemeProvider theme={currentTheme}>
-            <Box sx={{ width: '100%' }} dir={currentDirection}>
+            <Box sx={{ width: '100%', bgcolor: 'background.paper', }} dir={currentDirection}
+              
+            >
                 <Header />
                 <Box
                     sx={{

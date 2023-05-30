@@ -52,14 +52,15 @@ function TodosList({
                 }}
             >
                 {todos.map((todo) => (
-                    <ListItem key={todo.id}>
+                    <ListItem key={todo.id}  sx={{
+                        fontSize:'10px',
+                        '@media (max-width: 400px)': {
+                            fontSize: '5px',
+                        },}}>
                         <ListItemText
                             primary={todo.text}
-                            sx={{
-                                '@media (max-width: 400px)': {
-                                    fontSize: '0.6rem',
-                                },
-                            }}
+                            
+                       
                         />
                         <ListItemSecondaryAction>
                             <IconButton
