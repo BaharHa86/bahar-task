@@ -51,7 +51,7 @@ function MainLayout({ children }: MainLayoutProps) {
    
     return (
         <ThemeProvider theme={currentTheme}>
-            <Box sx={{ width: '100%', bgcolor: 'background.paper', }} dir={currentDirection}
+            <Box sx={{ width: '100%', bgcolor: 'background.paper',color:'text.primary' }} dir={currentDirection}
               
             >
                 <Header />
